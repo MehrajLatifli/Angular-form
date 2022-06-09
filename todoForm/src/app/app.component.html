@@ -1,0 +1,160 @@
+<div class="registration-form">
+  <form>
+    <div class="form-icon">
+      <span>
+
+        <!-- <img width="45px" id="logo"  src="../assets/BootstrapIcons/node_modules/bootstrap-icons/icons/person.svg"> -->
+
+
+          <svg id="icons">
+
+          </svg>
+
+      </span>
+
+    </div>
+    <div class="form-group">
+      <input #Name="ngModel" type="text" minlength="2" required class="form-control item" name="Name" id="Name"
+        placeholder="Name" ngModel>
+
+      <div class="alert alert-danger" *ngIf="Name.touched && Name.invalid">
+        <div *ngIf="Name?.errors?.['required']">
+          Name is required
+        </div>
+        <div *ngIf="Name?.errors?.['minlength']">
+          Name is invalid
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <input #Surname="ngModel" type="text" required class="form-control item" name="Surname" id="Surname"
+        placeholder="Surname" ngModel>
+
+      <div class="alert alert-danger" *ngIf="Surname.touched && Surname.invalid">
+        <div *ngIf="Surname?.errors?.['required']">
+          Surname is required
+        </div>
+        <div *ngIf="Surname?.errors?.['minlength']">
+          Surname is invalid
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <input #Age="ngModel" min="15" type="number" required class="form-control item" name="Age" id="Age"
+        placeholder="Age" ngModel>
+
+      <div class="alert alert-danger" *ngIf="Age.touched && Age.invalid">
+        <div *ngIf="Age?.errors?.['required']">
+          Age is required
+        </div>
+        <div *ngIf="Age?.errors?.['min']">
+          Age must be >= 15
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <input #HireDate="ngModel" type="date" min='1900-01-01' required class="form-control item" name="Hire Date"
+        id="Hire Date" placeholder="Hire Date" ngModel>
+
+
+      <div class="alert alert-danger" *ngIf="HireDate.touched && HireDate.invalid">
+        <div *ngIf="HireDate?.errors?.['required']">
+          Hire Date is required
+        </div>
+        <div *ngIf="HireDate?.errors?.['min']">
+          Hire must be >= 1900-01-01
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+
+      <label id="containerlabel" class="form-group">
+        <br>
+
+        <div id="containerlabelitem_1" id="upload">Photo
+
+          <input id="file_input_id" accept="image/*" type="file" style="display:none;"  (change)="onselectetFile($event)">
+
+        </div>
+
+        <div id="containerlabelitem_2">
+
+          <img #Image style="width: 100px;" class="rounded" [src]="url">
+
+        </div>
+
+      </label>
+
+    </div>
+    <!-- <div class="form-group">
+        <input type="text" class="form-control item" id="birth-date" placeholder="Birth Date">
+    </div> -->
+    <div class="form-group">
+      <button type="button" class="btn btn-block create-account"
+        (click)="additem(Name.value,Surname.value,Age.value,HireDate.value, Image.src)">Add List</button>
+    </div>
+  </form>
+  <!-- <div class="social-media">
+      <h5>Sign up with social media</h5>
+      <div class="social-icons">
+          <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
+          <a href="#"><i class="icon-social-google" title="Google"></i></a>
+          <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
+      </div>
+  </div> -->
+</div>
+
+<div class="table-responsive">
+
+  <table class="table bg-primary">
+    <thead>
+      <tr class="text-light">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Hire Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody #tbody_>
+      <tr #tr_ *ngFor="let item of getTableitem()" class="text-light">
+
+        <td>
+          <img #UpdateImage style="width: 100px;" class="rounded" [src]="item.Image">
+          <!-- <input #UpdateImage type="text" [(ngModel)]="item.Image"> -->
+        </td>
+
+        <td>
+          <input #UpdateName type="text" [(ngModel)]="item.Name">
+        </td>
+        <td>
+          <input #UpdateSurname type="text" [(ngModel)]="item.Surname">
+        </td>
+        <td>
+          <input #UpdateAge type="number" [(ngModel)]="item.Age">
+        </td>
+        <td>
+          <input #UpdateHireDate type="date" [(ngModel)]="item.HireDate">
+        </td>
+        <td>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <button type="button" class="btn btn-danger" (click)="removeItem(item)"> Remove</button>
+
+            <button type="button" class="btn btn-warning"
+              (click)="updateitem(item, UpdateName.value,UpdateSurname.value,UpdateAge.value,UpdateHireDate.value,UpdateImage)">
+              Update</button>
+          </div>
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>
